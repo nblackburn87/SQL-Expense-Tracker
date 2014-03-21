@@ -24,18 +24,20 @@ class Purchase
     purchases
   end
 
+   def ==(other)
+    self.description == other.description && self.amount == other.amount &&self.date == other.date && self.id == other.id
+  end
+
   def save
     result = DB.exec("INSERT INTO purchase (description, amount, date) VALUES ('#{@description}', #{@amount}, '#{@date}') RETURNING id;")
     @id = result.first['id'].to_i
   end
 
-  def destroy
+  def delete
     DB.exec("DELETE FROM purchase WHERE id = #{@id};")
   end
 
-  def ==(other)
-    self.description == other.description && self.amount == other.amount && self.date == other.date && self.id == other.id
-  end
+
 
   def self.find_by_description(input)
     results = DB.exec("SELECT * FROM purchase WHERE description = '#{input}';")
@@ -53,5 +55,4 @@ class Purchase
 
     DB.exec("UPDATE purchase SET description = '#{@description}', amount = #{@amount}, date = '#{@date}' WHERE id = #{@id};")
   end
-
 end

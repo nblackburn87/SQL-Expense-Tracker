@@ -65,6 +65,63 @@ def view_expenses
   main_menu
 end
 
+def edit_expense
+  puts "\n"
+  purchases = Purchase.all
+  purchases.each_with_index do |purchase, index|
+    puts "#{index+1}) #{purchase.description}, purchased for #{purchase.amount}, on #{purchase.date}"
+    end
+  puts "Choose a purchase to edit: "
+  edit_input = gets.chomp.to_i
+  this_purchase = purchases[edit_input - 1]
+  puts "Description: '#{this_purchase.description}', $ #{this_purchase.amount}, Date: #{this_purchase.description}'"
+  puts "D to edit description"
+  puts "A to edit amount"
+  puts "DATE to edit date"
+  selection = gets.chomp.upcase
+  case selection
+  when 'D'
+    puts "Enter new description: "
+    new_description = gets.chomp
+    this_purchase.update('description' => new_description)
+    puts "EDITED!!!"
+    puts "Description: '#{this_purchase.description}', $ #{this_purchase.amount}, Date: #{this_purchase.date}'"
+  when 'A'
+    puts "Enter new amount: "
+    new_amount = gets.chomp
+    this_purchase.update('amount' => new_amount)
+    puts "EDITED!!!"
+    puts "Description: '#{this_purchase.description}', $ #{this_purchase.amount}, Date: #{this_purchase.date}'"
+  when 'DATE'
+    puts "Enter new date: "
+    new_date = gets.chomp
+    this_purchase.update('date' => new_date)
+    puts "EDITED!!!"
+    puts "Description: '#{this_purchase.description}', $ #{this_purchase.amount}, Date: #{this_purchase.date}'"
+  end
+  puts "Edit another expense? (Y/N)"
+  another_edit = gets.chomp
+  case another_edit
+  when 'Y' then edit_expense
+  when 'N' then main_menu
+  end
+end
 
+def delete_expense
+  purchases = Purchase.all
+  purchases.each_with_index do |purchase, index|
+    puts "#{index+1}) #{purchase.description}, purchased for #{purchase.amount}, on #{purchase.date}"
+    end
+  puts "Choose a purchase to delete: "
+  delete_input = gets.chomp.to_i
+  delete_purchase = purchases[delete_input - 1].delete
+  puts "Deleted."
+  puts "Delete another expense? (Y/N)"
+  another_delete = gets.chomp
+  case another_delete
+  when 'Y' then delete_expense
+  when 'N' then main_menu
+  end
+end
 
-welcome
+main_menu
