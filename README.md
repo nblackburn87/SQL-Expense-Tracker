@@ -11,3 +11,6 @@
 * As a user, I want to filter my spending reports by time period, so that I can know how my spending habits have changed over time.
 * As a user, I want to set a monthly budget for each category, so that I can create goals for my spending.
 * As a user, I want to see if I've exceeded my budget for each category, each month.
+
+
+Note: We finished building the user interface for adding and viewing. The date format has a blank time for some reason.
