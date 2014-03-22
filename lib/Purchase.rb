@@ -16,8 +16,8 @@ class Purchase
   end
 
   def self.all
-    results = DB.exec("SELECT * FROM purchase;")
     purchases = []
+    results = DB.exec("SELECT * FROM purchase;")
     results.each do |result|
       purchases << Purchase.new(result)
     end
@@ -37,8 +37,6 @@ class Purchase
     DB.exec("DELETE FROM purchase WHERE id = #{@id};")
   end
 
-
-
   def self.find_by_description(input)
     results = DB.exec("SELECT * FROM purchase WHERE description = '#{input}';")
     purchases = []
@@ -55,4 +53,10 @@ class Purchase
 
     DB.exec("UPDATE purchase SET description = '#{@description}', amount = #{@amount}, date = '#{@date}' WHERE id = #{@id};")
   end
+
+  def search_purchase(user_input)
+    result = DB.exec("SELECT * FROM purchase WHERE description LIKE '%#{user_input}%';")
+    result.class
+  end
+
 end

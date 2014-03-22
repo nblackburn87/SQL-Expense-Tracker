@@ -3,12 +3,12 @@ class Category
   attr_reader :name, :id
 
   def initialize(attributes)
-    @name = attributes[:name]
-    @id = attributes[:id]
+    @name = attributes['name']
+    @id = attributes['id']
   end
 
   def self.create(name)
-    new_category = Category.new({:name => name})
+    new_category = Category.new({'name' => name})
     new_category.save
     new_category
   end
@@ -17,9 +17,7 @@ class Category
     category = []
     results = DB.exec("SELECT * FROM category;")
     results.each do |result|
-      name = result['name']
-      id = result['id'].to_i
-      category << Category.new({:name => name, :id => id})
+      category << Category.new(result)
     end
     category
   end

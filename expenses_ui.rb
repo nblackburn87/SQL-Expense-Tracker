@@ -100,10 +100,13 @@ def edit_expense
     puts "Description: '#{this_purchase.description}', $ #{this_purchase.amount}, Date: #{this_purchase.date}'"
   end
   puts "Edit another expense? (Y/N)"
-  another_edit = gets.chomp
+  another_edit = gets.chomp.upcase
   case another_edit
   when 'Y' then edit_expense
   when 'N' then main_menu
+  else
+  puts "Not a valid response. Choose again."
+  edit_expense
   end
 end
 
@@ -117,11 +120,20 @@ def delete_expense
   delete_purchase = purchases[delete_input - 1].delete
   puts "Deleted."
   puts "Delete another expense? (Y/N)"
-  another_delete = gets.chomp
+  another_delete = gets.chomp.upcase
   case another_delete
   when 'Y' then delete_expense
   when 'N' then main_menu
+  else
+    puts "Not a valid response. Choose again."
+    delete_expense
   end
+end
+
+def search_expense
+
+
+
 end
 
 main_menu

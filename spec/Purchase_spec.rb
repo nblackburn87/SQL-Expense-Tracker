@@ -40,14 +40,14 @@ describe 'Purchase' do
     end
   end
 
-  describe '#destroy' do
-    it 'removes an instance from the database' do
-      test_purchase = Purchase.new({ 'description' => 'Coffee', 'amount' => '6.50', 'date' => '2014-03-21', 'id' => 1 })
-      test_purchase.save
-      test_purchase.destroy
-      Purchase.all.should eq []
-    end
-  end
+  # describe '#destroy' do
+  #   it 'removes an instance from the database' do
+  #     test_purchase = Purchase.new({ 'description' => 'Coffee', 'amount' => '6.50', 'date' => '2014-03-21', 'id' => 1 })
+  #     test_purchase.save
+  #     test_purchase.destroy
+  #     Purchase.all.should eq []
+  #   end
+  # end
 
   describe '.find_by_description' do
     it 'should return an array of purchases with the description' do
@@ -69,6 +69,13 @@ describe 'Purchase' do
       test_purchase.date.should eq '2000-01-01'
     end
   end
+
+  describe '#search_purchase' do
+    it 'searches purchases and returns a list of items that match the search' do
+      test_purchase_1 = Purchase.create({ 'description' => 'Candy', 'amount' => '1.50', 'date' => '2014-03-20' })
+      test_purchase_2 = Purchase.create({ 'description' => 'Beer', 'amount' => '16.50', 'date' => '2014-03-20' })
+
+
 end
 
 
